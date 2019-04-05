@@ -121,7 +121,7 @@
     </div>
     {{/if}}
     <div class="clearfix"></div>
-    
+
     {{#if article.author}}<h4 class="muted">Authored by: {{article.author}}</h4>{{/if}}
 
     {{#if article.deprecated}}
@@ -192,7 +192,7 @@
         <tbody>
         {{#each this}}
           <tr>
-            <td class="code">{{{splitFill field "." "&nbsp;&nbsp;"}}}{{#if optional}} <span class="label label-optional">{{__ "optional"}}</span>{{/if}}</td>
+            <td class="code">{{field}}{{#if optional}} <span class="label label-optional">{{__ "optional"}}</span>{{/if}}</td>
             {{#if ../../_hasType}}
               <td>
                 {{{type}}}
