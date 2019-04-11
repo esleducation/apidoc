@@ -204,6 +204,13 @@ pre.language-html {
   color: #ffffff;
 }
 
+.type--small {
+	font-size: 9px;
+	padding: 2px 3px;
+	margin-bottom: 2px;
+	font-weight: 400;
+}
+
 .type__get {
   background-color: green;
 }

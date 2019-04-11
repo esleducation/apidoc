@@ -30,7 +30,7 @@
         {{/if}}
       {{else}}
         <li class="{{#if hidden}}hide {{/if}}" data-group="{{group}}" data-name="{{name}}" data-version="{{version}}">
-          <a href="#api-{{group}}-{{name}}" class="nav-list-item">{{title}}</a>
+          <a href="#api-{{group}}-{{name}}" class="nav-list-item"><span class="type type--small type__{{toLowerCase type}}">{{toLowerCase type}}</span>&nbsp;{{title}}</a>
         </li>
       {{/if}}
     {{/if}}
@@ -102,8 +102,17 @@
 
 <script id="template-article" type="text/x-handlebars-template">
   <article id="api-{{article.group}}-{{article.name}}-{{article.version}}" {{#if hidden}}class="hide"{{/if}} data-group="{{article.group}}" data-name="{{article.name}}" data-version="{{article.version}}">
+    <!-- START OF ACCORDDEON TRIGGER not indented for git history purpose -->
+    <div style="cursor:pointer" data-toggle="collapse" data-target="#article-{{toLowerCase article.groupTitle}}-{{toLowerCase article.name}}-desc" aria-expanded="false">
     <div class="pull-left">
-      <h1>{{article.groupTitle}}{{#if article.title}} - {{article.title}}{{/if}}</h1>
+      <h1 style="margin:0;">
+      <span class="type type__{{toLowerCase article.type}}">{{toLowerCase article.type}}</span>
+      {{#if article.title}}
+        {{article.title}}
+      {{ else }}
+        {{article.groupTitle}} - {{article.name}}
+      {{/if}}
+      </h1>
     </div>
     {{#if template.withCompare}}
     <div class="pull-right">
@@ -120,20 +129,25 @@
       </div>
     </div>
     {{/if}}
+    </div> <!-- END OF ACCORDDEON TRIGGER not indented for git history purpose -->
     <div class="clearfix"></div>
-
-    {{#if article.author}}<h4 class="muted">Authored by: {{article.author}}</h4>{{/if}}
-
-    {{#if article.deprecated}}
-      <p class="deprecated"><span>{{__ "DEPRECATED"}}</span>
-        {{{markdown article.deprecated.content}}}
-      </p>
-    {{/if}}
 
     {{#if article.description}}
       <p>{{{nl2br article.description}}}</p>
     {{/if}}
-    <span class="type type__{{toLowerCase article.type}}">{{toLowerCase article.type}}</span>
+
+  <!-- START OF ACCORDDEON not indented for git history purpose -->
+  <div class="collapse" id="article-{{toLowerCase article.groupTitle}}-{{toLowerCase article.name}}-desc">
+  {{#if article.author}}<h4 class="muted">Authored by: {{article.author}}</h4>{{/if}}
+
+  {{#if article.deprecated}}
+  <p class="deprecated"><span>{{__ "DEPRECATED"}}</span>
+    {{{markdown article.deprecated.content}}}
+  </p>
+  {{/if}}
+
+
+
     <pre class="prettyprint language-html" data-type="{{toLowerCase article.type}}"><code>{{article.url}}</code></pre>
 
     {{#if article.permission}}
@@ -174,6 +188,7 @@
     {{subTemplate "article-param-block" params=article.error _col1="Name" _hasType=_hasTypeInErrorFields section="error"}}
 
     {{subTemplate "article-sample-request" article=article id=id}}
+  </div> <!-- END OF ACCORDDEON not indented for git history purpose -->
   </article>
 </script>
 
