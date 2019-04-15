@@ -111,6 +111,37 @@ define([
     });
 
     /**
+     * Helper method the check if a value occurs in another string
+     * @method if_occurs
+     * @param  {String} str       the base string
+     * @param  {String} substring the string to search in the base one
+     * @param  {??} options   Needed by handlebars...
+     * @return {??}           A pased handel IF .. ?
+     */
+    Handlebars.registerHelper('if_occurs', function(str, substring, options) {
+        // lowercases strings to check occurences no matter the uppercases
+        str = str.toLowerCase()
+        substring = substring.toLowerCase()
+
+        // https://github.com/helpers/handlebars-helpers/blob/master/lib/string.js#L278
+        // if (type ofstr)) return '';
+        var len = substring.length;
+        var pos = 0;
+        var n = 0;
+
+        while ((pos = str.indexOf(substring, pos)) > -1) {
+            n++;
+            pos += len;
+        }
+        // return n;
+        if (n > 0)
+            return options.fn(this);
+        else
+            return options.inverse(this);
+    });
+
+
+    /**
      *
      */
     var templateCache = {};

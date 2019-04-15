@@ -228,6 +228,17 @@
         {{/each}}
         </tbody>
       </table>
+
+      {{#if_gt ../params.examples.length compare=0}}
+        {{#each ../params.examples}}
+          {{#if_occurs title @../key}}
+              <div style="margin-bottom:1.5em">
+                <pre class="prettyprint language-{{type}}" data-type="{{type}}"><code>{{reformat content type}}</code></pre>
+              </div>
+			    {{/if_occurs}}
+        {{/each}}
+      {{/if_gt}}
+
     {{/each}}
     {{#if_gt params.examples.length compare=0}}
       <ul class="nav nav-tabs nav-tabs-examples">
